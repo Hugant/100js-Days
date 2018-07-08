@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<link rel = "short icon" href = "../../../Images/icon.ico" type="image/x-icon">
+		<title>Modulation of the biological process</title>
+        <meta charset = "UTF-8">
+        <link rel = "stylesheet" href = "Style/Style.css">
+        <link rel = "stylesheet" href = "../../../CommonStyles/homeButton.css">
+    </head>
+    <body id = "body">
+        <div id = "center">
+            <canvas id = "canvas"></canvas>
+        </div>
+        <div id = "info">
+            <div id = "nCreatures">Number <font color = "green">creatures</font>: <span id = "outC">0</span></div>
+            <div id = "nRabbits">Number <font color = "blue" >rabbits</font>: <span id = "outR">0</span></div>
+            <div id = "nVolfs">Number <font color = "red">volfs</font>: <span id = "outV">0</span></div>
+        </div>
+
+        <div id = "buttonsSection">
+            <a id = "getChart" class = "home">get chart</a>
+            <a id = "refresh" class = "home">refresh</a>
+        </div>
+
+        <div id = "chartSection">
+            <canvas id = "chart"></canvas>
+        </div>
+        <div id = "loadImages">
+            <img src = "Images/grass1.jpg" id = "grass1">
+            <img src = "Images/grass2.jpg" id = "grass2">
+            <img src = "Images/tree1.jpg" id = "tree1">
+            <img src = "Images/tree2.jpg" id = "tree2">
+            <img src = "Images/volfM.png" id = "volfM">
+            <img src = "Images/volfW.png" id = "volfW">
+            <img src = "Images/rabbitM.png" id = "rabbitM">
+            <img src = "Images/rabbitW.png" id = "rabbitW">
+            <img src = "Images/inLove.png" id = "inLove">
+            <img src = "Images/hungry.png" id = "hungry">
+            <img src = "Images/death.png" id = "death">
+        </div>
+
+        <script src = "JavaScript/draw.js"></script>
+        <script src = "JavaScript/rabbit.js"></script>
+        <script src = "JavaScript/volf.js"></script>
+        <script src = "JavaScript/script.js"></script>
+        <script src = "JavaScript/init.js"></script>
+        <script src = "JavaScript/ai.js"></script>
+
+        <script src = "JavaScript/chart.js"></script>
+    </body>
+	<script src = "../../../YandexMetrika.js"></script>
+</html>
