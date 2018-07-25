@@ -1,0 +1,43 @@
+html, body {
+	background: black;
+	margin: 0;
+	padding: 0;
+	-webkit-user-select: none;
+     -moz-user-select: none;
+    	-ms-user-select: none;
+}
+
+.wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+#canvas {
+	display: none;
+	border: 1px solid lightgray;
+}
+
+.game-button {
+	font-size: 30pt;
+	color: white;
+	border: 1px solid white;
+	padding: 1rem 6rem;
+	transition-duration: .5s;
+	margin: .5rem;
+	background: inherit;
+}
+
+.game-button:hover {
+	border: 1px solid red;
+	cursor: pointer;
+	transition-duration: .5s;
+}
+
+.game-button:active {
+	border: 1px solid white;
+	background: white;
+	color: inherit;
+	transition-duration: .5s;
+}
