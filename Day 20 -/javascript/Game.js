@@ -42,6 +42,8 @@ class Game {
 		this.levels.init();
 		this.level = this.levels.current();
 
+
+		// TODO: Remove this comments
 		// let map = [
 		// 	[-1, -1, -1, -1],
 		// 	[1, 2, 2, 3]];

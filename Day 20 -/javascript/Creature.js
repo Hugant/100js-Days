@@ -34,7 +34,7 @@ class Creature {
 	}
 
 	mapCollision() {
-
+		// TODO: Declare function
 	}
 
 	collision() {
@@ -55,7 +55,7 @@ class Player extends Creature {
 	}
 
 	exited() {
-
+		// TODO: Declare function
 	}
 
 	move(keyboard) {
@@ -94,7 +94,7 @@ class Player extends Creature {
 	}
 
 	collision(enemy) {
-
+		// TODO: Declare function
 	}
 }
 
@@ -127,7 +127,7 @@ class Enemy extends Creature {
 	}
 
 	collision(player) {
-
+		// TODO: Declare function
 	}
 }
 
@@ -259,9 +259,7 @@ class Saw extends Enemy {
 
 	}
 
-	move() {
-
-	}
+	move() {}
 }
 
 class HalfSaw extends Enemy {
@@ -272,9 +270,7 @@ class HalfSaw extends Enemy {
 
 	}
 
-	move() {
-
-	}
+	move() {}
 }
 
 
@@ -286,7 +282,5 @@ class Barnacle extends Enemy {
 
 	}
 
-	move() {
-
-	}
+	move() {}
 }

@@ -4,9 +4,11 @@ class Background {
 		this.background = background;
 	}
 
-
+	init() {
+		// TODO: declare function
+	}
 
 	draw(context) {
-
+		// TODO: declare function
 	}
 }
