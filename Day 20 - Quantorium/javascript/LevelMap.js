@@ -4,6 +4,8 @@ class LevelMap {
 		this.map = map;
 		this.ground = ground;
 		this.tiles = [];
+		this.image = new Image();
+		this.image.src = "images/tiles.svg"
 	}
 
 	init() {
@@ -26,7 +28,7 @@ class LevelMap {
 
 	draw(context) {
 		for (let tile in this.tiles) {
-			this.tiles[tile].draw(context);
+			context.drawImage(this.image, 0, 0, 70, 70, this.tiles[tile].x, this.tiles[tile].y, 70, 70);
 		}
 	}
 }

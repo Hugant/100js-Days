@@ -7,7 +7,7 @@ const CHARACTERS = {
 	PINK: 	2,
 	YELLOW: 3,
 	BEIGE: 	4
-}
+};
 
 const MOTIONS = {
 	FRONT: [0],
@@ -18,12 +18,12 @@ const MOTIONS = {
 	WALK:  [5, 6],
 	CLIMB: [7, 8],
 	SWIM:  [9, 10]
-}
+};
 
 const SPRITE = {
 	WIDTH: 70,
 	HEIGHT: 90
-}
+};
 
 class PlayerSprites {
 	constructor(spriter) {

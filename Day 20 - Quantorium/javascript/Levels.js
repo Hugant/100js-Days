@@ -14,10 +14,20 @@ class Levels {
 		], this.sprites.enemies);
 		let decoration = [];
 		let map = [
-			[],
-			[]
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0,],
+			[0, 0, 0, 0, 0, 0, 0, 0,],
+			[0, 0, 0, 0, 0, 0, 0, 0,],
+			[0, 0, 0, 0, 0, 0, 0, 0,],
+			[0, 0, 0, 0, 0, 0, 0, 0,],
+			[0, 0, 0, 0, 0, 0, 0, 0,]
 		];
-		let background = new Background(map, BACKGROUNDS.SHADOW_VALLEY);
+
+		let backgroundImage = this.spriter.getSprite(BACKGROUND_SPRITE_NAME)
+			.getSection(BACKGROUND_SECTION_NAME)
+			.getObject(BACKGROUNDS.SHADOW_VALLEY.NAME);
+
+		let background = new Background(map, backgroundImage);
 
 		map = new LevelMap(this.spriter, map, GROUNDS.GRASS);
 
@@ -27,10 +37,14 @@ class Levels {
 			decoration, enemies, player));
 		this.levels.push(new Level(this.spriter, "Level 3", background, map,
 			decoration, enemies, player));
+
+		for (let level in this.levels) {
+			this.levels[level].init();
+		}
 	}
 
 	current() {
-		return this.levels.slice(this.currentLevel, 1);
+		return this.levels.slice(this.currentLevel, 1)[0];
 	}
 
 	hasNext() {
@@ -38,7 +52,7 @@ class Levels {
 	}
 
 	next() {
-		return this.levels.slice(++this.currentLevel, 1);
+		return this.levels.slice(++this.currentLevel, 1)[0];
 	}
 }
 

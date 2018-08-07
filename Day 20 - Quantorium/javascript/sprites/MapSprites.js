@@ -102,12 +102,17 @@ const TILES = {
 		NAME: "Right corner tile",
 		X: 17
 	}
-}
+};
+
+const BOXES = {
+	
+};
+
 
 const TILE = {
 	WIDTH: 70,
 	HEIGHT: 70
-}
+};
 
 class MapSprites {
 	constructor(spriter) {

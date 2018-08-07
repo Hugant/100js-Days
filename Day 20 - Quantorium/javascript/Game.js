@@ -106,17 +106,9 @@ class Game {
 		});
 	}
 
-	setMainEngine(engine) {
-		if (typeof engine === "function") {
-			this.engine = engine;
-			this.mainEngine = engine;
-		} else {
-			throw "Type of engine should be 'function'";
-		}
-	}
-
 	setEngine(engine) {
 		if (typeof engine === "function") {
+			this.mainEngine = this.engine;
 			this.engine = engine;
 		} else {
 			throw "Type of engine should be 'function'";
@@ -124,15 +116,7 @@ class Game {
 	}
 
 	engine() {
-		// this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		// this.player.move(this.keyboard);
-		// this.player.draw(this.context);
-
-		// for (let enemy in this.enemies) {
-		// 	this.enemies[enemy].move(this.keyboard);
-		// 	this.enemies[enemy].draw(this.context);
-		// }
-
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.level.move(this.keyboard);
 		this.level.draw(this.context);
 
