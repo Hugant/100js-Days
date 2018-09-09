@@ -1,11 +1,6 @@
 class Manager {
 	constructor() {
-		this.vocabulary = ["Marshmello", "Lil Peep", "Future", "21 Savage", "Ty" +
-			" Dolla $ign", "Logic", "88rising", "6ix9ine", "Tyga", "Chris Brown", "Travis Scott",
-			"Xxxtentacion", "Drake", "Khalid", "Rich The Kid", "Tory Lanez", "Riff" +
-			" Raff", "Lil Pump", "Bhad Bhabie", "Imagine Dragons", "The Weeknd", "Migos",
-			"Post Malone", "Twenty One Pilots", "Lil Yachty", "Lil Uzi Vert", "Maroon 5",
-			"Yellow Claw", "Kendrick Lamar", "Aminé", "Rae Sremmurd"];
+		this.vocabulary = [];
 		this.words = [];
 		this.maxFontSize = 30;
 		this.colorful = false;
