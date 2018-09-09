@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Rain of words - Hugant Mirron</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="style/style.css"/>
+		<link rel="stylesheet" type="text/css" href="style/normalize.css" />
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+
+		<div class="wrapper">
+			<span class="input input--kuro">
+				<input class="input__field input__field--kuro" type="text"
+				       id="input">
+				<label class="input__label input__label--kuro" for="input">
+					<span
+						class="input__label-content input__label-content--kuro">Click
+					on me and enter word</span>
+				</label>
+			</span>
+
+			<div class="checkbox-wrapper">
+				<input class="checkbox" id="checkbox" type="checkbox"/>
+				<label for="checkbox" class="checkbox-label">
+					<span class="on">Colorful</span>
+					<span class="off">White</span>
+				</label>
+			</div>
+		</div>
+	</body>
+	<script src="javascript/Word.js"></script>
+	<script src="javascript/Manager.js"></script>
+	<script src="javascript/index.js"></script>
+</html>
