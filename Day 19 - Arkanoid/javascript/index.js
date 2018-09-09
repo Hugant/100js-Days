@@ -293,7 +293,7 @@ window.onload = function() {
 }
 
 function start() {
-	game.engine()
+	game.engine();
 	requestAFid = window.requestAnimationFrame(start);
 }
 
