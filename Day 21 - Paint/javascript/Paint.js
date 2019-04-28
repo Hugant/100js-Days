@@ -17,7 +17,6 @@ class Paint {
       fill: null
     };
     this.drawed = [];
-    this.preDraw = function() {};
     this.lastIsUpdatable = false;
   }
 
@@ -51,8 +50,6 @@ class Paint {
     for (let figure of this.drawed) {
       figure.draw();
     }
-
-    this.preDraw();
   }
 
   onmousedown(event) {
@@ -74,23 +71,21 @@ class Paint {
     } else if (this.currentFigure === this.figures.CURVE) {
       this.drawed.push(new Curve(this.context, event.layerX,
           event.layerY, this.colors.stroke));
+    } else if (this.currentFigure === this.figures.ERASER) {
+      this.drawed.push(new Eraser(this.context, event.layerX,
+          event.layerY, 10, this.colors.background, "white"));
     }
 
     this.lastIsUpdatable = true;
   }
 
-  onmouseup(event) {
+  onmouseup() {
     this.lastIsUpdatable = false;
   }
 
   onmousemove(event) {
     if (this.lastIsUpdatable) {
       this.drawed[this.drawed.length - 1].update(event.layerX, event.layerY);
-    } else {
-      if (this.currentFigure === this.figures.ERASER) {
-        Eraser.preDraw(this.context, event.layerX, event.layerY, 10,
-            this.colors.background, "white");
-      }
     }
   }
 }

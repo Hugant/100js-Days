@@ -2,6 +2,7 @@ class Curve {
 	constructor(context, x, y, strokeColor) {
 		this.context = context;
 		this.dots = [{x: x, y: y}]
+		this.dots = [{x: x, y: y}];
 		this.strokeColor = strokeColor;
 	}
 
