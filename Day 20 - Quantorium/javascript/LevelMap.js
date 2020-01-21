@@ -1,34 +1,34 @@
 class LevelMap {
-	constructor(spriter, map, ground) {
-		this.spriter = spriter;
+	constructor(map, ground) {
 		this.map = map;
+		this.maxX = 0;
+		this.maxY = 0;
 		this.ground = ground;
 		this.tiles = [];
-		this.image = new Image();
-		this.image.src = "images/tiles.svg"
 	}
 
-	init() {
-		let location = this.spriter.getSprite(MAP_SPRITE_NAME)
-			.getSection(LOCATIONS_SECTION_NAME)
-			.getSection(this.ground.NAME);
+	init(spriteManager) {
+		let location = spriteManager.getSprite(MAP_SPRITE_NAME).getSection(this.ground);
 
 		for (let i in this.map) {
 			for (let j in this.map[i]) {
-				if (this.map[i][j] === -1) {
-					continue;
+				let tile = TILES[this.map[i][j]];
+				if (typeof tile !== 'undefined') {
+					this.tiles.push(new Tile(j * DIMENSIONS.MAP_ELEMENT.WIDTH,
+							i * DIMENSIONS.MAP_ELEMENT.HEIGHT,
+							DIMENSIONS.MAP_ELEMENT.WIDTH, DIMENSIONS.MAP_ELEMENT.HEIGHT,
+							location.getObject(tile)));
 				}
-
-				this.tiles.push(new Tile(j * TILE.WIDTH, i * TILE.HEIGHT,
-					TILE.WIDTH, TILE.HEIGHT,
-					location.getObject(TILES[this.map[i][j]].NAME)));
 			}
 		}
+
+		this.maxX = this.map[0].length * DIMENSIONS.MAP_ELEMENT.WIDTH;
+		this.maxY = this.map.length * DIMENSIONS.MAP_ELEMENT.HEIGHT;
 	}
 
 	draw(context) {
-		for (let tile in this.tiles) {
-			context.drawImage(this.image, 0, 0, 70, 70, this.tiles[tile].x, this.tiles[tile].y, 70, 70);
+		for (let tile of this.tiles) {
+			tile.draw(context);
 		}
 	}
 }

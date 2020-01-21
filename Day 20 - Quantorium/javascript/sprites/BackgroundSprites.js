@@ -1,4 +1,4 @@
-const BACKGROUND_SPRITE_NAME = "Background";
+const BACKGROUND_SPRITE_NAME = "Backgrounds";
 const BACKGROUND_SPRITE_SRC = "images/backgrounds.svg";
 const BACKGROUND_SECTION_NAME = "backgrounds";
 
@@ -51,19 +51,12 @@ const BACKGROUND_SPRITE = {
 };
 
 class BackgroundSprites {
-	constructor(spriter) {
-		this.spriter = spriter;
-		this.spriteName = BACKGROUND_SPRITE_NAME;
-		this.spriteSrc = BACKGROUND_SPRITE_SRC;
-		this.spriteSectionName = BACKGROUND_SECTION_NAME;
-	}
-
-	init() {
-		let sprite = this.spriter.addSprite(this.spriteName, this.spriteSrc);
-		let backgroundSection = sprite.createSection(this.spriteSectionName);
+	init(spriteManager) {
+		let sprite = spriteManager.addSprite(BACKGROUND_SPRITE_NAME,
+				new StaticSprite(BACKGROUND_SPRITE_SRC));
 
 		for (let background in BACKGROUNDS) {
-			backgroundSection.createObject(sprite.sprite, BACKGROUNDS[background].NAME,
+			sprite.createObject(BACKGROUNDS[background].NAME,
 				BACKGROUNDS[background].X, BACKGROUNDS[background].Y,
 				BACKGROUND_SPRITE.WIDTH, BACKGROUND_SPRITE.HEIGHT);
 		}

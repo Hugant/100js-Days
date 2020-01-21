@@ -8,7 +8,7 @@ const ANIMATION_TRANSITION = function(params) {
 	}
 
 	return false;
-}
+};
 
 const CREATURES = {
 	RAT: {
@@ -307,52 +307,43 @@ const CREATURES = {
 		REVERSE_Y_ADDITION: 62,
 		REVERSE_X_ADDITION: 0
 	}
-}
+};
 
 class EnemiesSprites {
-	constructor(spriter) {
-		this.spriter = spriter;
-		this.spriteName = ENEMY_SPRITE_NAME;
-		this.spriteSrc = ENEMY_SPRITE_SRC;
-	}
-
-	init() {
-		let sprite = this.spriter.addSprite(this.spriteName, this.spriteSrc);
+	init(spriteManager) {
+		let sprite = spriteManager.addSprite(ENEMY_SPRITE_NAME,
+				new AnimationSprite(ENEMY_SPRITE_SRC));
 
 		for (let creature in CREATURES) {
-			let character = sprite.createCharacter(CREATURES[creature].NAME);
-			character.params["time"] = Date.now();
+			let animationObject = sprite.createObject(CREATURES[creature].NAME);
+			animationObject.params["time"] = Date.now();
 
 			for (let motion in CREATURES[creature].MOVEMENTS) {
 				let spriteSteps = [];
 				let reverseSpriteSteps = [];
 
 				for (let step in CREATURES[creature].MOVEMENTS[motion].STEPS) {
-					spriteSteps.push(new SpriteObject(sprite.sprite, 
-						CREATURES[creature].MOVEMENTS[motion].STEPS[step].X,
-						CREATURES[creature].MOVEMENTS[motion].STEPS[step].Y,
-						CREATURES[creature].MOVEMENTS[motion].STEPS[step].WIDTH,
-						CREATURES[creature].MOVEMENTS[motion].STEPS[step].HEIGHT));
+					spriteSteps.push(new StaticObject(animationObject.image,
+							CREATURES[creature].MOVEMENTS[motion].STEPS[step].X,
+							CREATURES[creature].MOVEMENTS[motion].STEPS[step].Y,
+							CREATURES[creature].MOVEMENTS[motion].STEPS[step].WIDTH,
+							CREATURES[creature].MOVEMENTS[motion].STEPS[step].HEIGHT));
 
-					reverseSpriteSteps.push(new SpriteObject(sprite.sprite,
+					reverseSpriteSteps.push(new StaticObject(animationObject.image,
 						CREATURES[creature].MOVEMENTS[motion].STEPS[step].X +
-						CREATURES[creature].REVERSE_X_ADDITION,
+								CREATURES[creature].REVERSE_X_ADDITION,
 						CREATURES[creature].MOVEMENTS[motion].STEPS[step].Y +
-						CREATURES[creature].REVERSE_Y_ADDITION,
+								CREATURES[creature].REVERSE_Y_ADDITION,
 						CREATURES[creature].MOVEMENTS[motion].STEPS[step].WIDTH,
 						CREATURES[creature].MOVEMENTS[motion].STEPS[step].HEIGHT));
 				}
 
-				character.addMotion(motion.toLowerCase(), spriteSteps, 
-					CREATURES[creature].MOVEMENTS[motion].TRANSITION);
-				character.addMotion("reverse-" + motion.toLowerCase(), reverseSpriteSteps,
-					CREATURES[creature].MOVEMENTS[motion].TRANSITION);
+				animationObject.addMotion(motion.toLowerCase(), spriteSteps,
+						CREATURES[creature].MOVEMENTS[motion].TRANSITION);
+				animationObject.addMotion("reverse-" + motion.toLowerCase(),
+						reverseSpriteSteps, CREATURES[creature].MOVEMENTS[motion].TRANSITION);
 			}
 		}
-	}
-
-	getCharacter(name) {
-		return this.spriter.getSprite(this.spriteName).getCharacter(name);
 	}
 }
 

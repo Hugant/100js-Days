@@ -1,45 +1,50 @@
 class Levels {
 	constructor(spriter, sprites) {
-		this.spriter = spriter;
-		this.sprites = sprites;
+		// this.spriter = spriter;
+		// this.sprites = sprites;
 		this.levels = [];
 		this.currentLevel = 0;
 	}
 
-	init() {
-		let player = new Player(0, 0, 70, 90, this.sprites.player);
+	init(spriteManager) {
+		let player = new Player(400, 150, 70, 90, spriteManager.getSprite(CHARACTERS_SPRITE_NAME));
 		let enemies = new EnemiesList([
-			new Rat(0, 62, 62, 62, this.sprites.enemies),
-			new Bee(0, 124, 62, 62, this.sprites.enemies)
-		], this.sprites.enemies);
+			new Rat(300, 62, 62, 62, spriteManager.getSprite(ENEMY_SPRITE_NAME)),
+			// new Bee(0, 124, 62, 62, spriteManager.getSprite(ENEMY_SPRITE_NAME))
+		], spriteManager);
 		let decoration = [];
 		let map = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0,],
-			[0, 0, 0, 0, 0, 0, 0, 0,],
-			[0, 0, 0, 0, 0, 0, 0, 0,],
-			[0, 0, 0, 0, 0, 0, 0, 0,],
-			[0, 0, 0, 0, 0, 0, 0, 0,],
-			[0, 0, 0, 0, 0, 0, 0, 0,]
+			[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,],
+			[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,],
+			[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,],
+			[-1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,],
+			[-1, -1, 1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,],
+			[-1, -1, 1, -1, -1, -1, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,],
+			[-1, -1, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,],
+			[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+			// [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,],
+			// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+
+
 		];
 
-		let backgroundImage = this.spriter.getSprite(BACKGROUND_SPRITE_NAME)
-			.getSection(BACKGROUND_SECTION_NAME)
-			.getObject(BACKGROUNDS.SHADOW_VALLEY.NAME);
+		let backgroundImage = spriteManager.getSprite(BACKGROUND_SPRITE_NAME)
+			.getObject(BACKGROUNDS.PILL_VALLEY.NAME);
 
 		let background = new Background(map, backgroundImage);
 
-		map = new LevelMap(this.spriter, map, GROUNDS.GRASS);
+		map = new LevelMap(map, GROUNDS_NAMES.PLANET);
 
-		this.levels.push(new Level(this.spriter, "Level 1", background, map,
-			decoration, enemies, player));
-		this.levels.push(new Level(this.spriter, "Level 2", background, map,
-			decoration, enemies, player));
-		this.levels.push(new Level(this.spriter, "Level 3", background, map,
-			decoration, enemies, player));
+		this.levels.push(new Level("Level 1", background, map,
+			null, enemies, player));
+		// this.levels.push(new Level(this.spriter, "Level 2", background, map,
+		// 	decoration, enemies, player));
+		// this.levels.push(new Level(this.spriter, "Level 3", background, map,
+		// 	decoration, enemies, player));
 
 		for (let level in this.levels) {
-			this.levels[level].init();
+			this.levels[level].init(spriteManager);
 		}
 	}
 

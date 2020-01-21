@@ -12,9 +12,9 @@ class EnemiesList {
 		}
 	}
 
-	move(keyboard) {
+	move(keyboard, tiles) {
 		for (let enemy in this.enemies) {
-			this.enemies[enemy].move(keyboard);
+			this.enemies[enemy].move(keyboard, tiles);
 		}
 	}
 }

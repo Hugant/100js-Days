@@ -1,140 +1,87 @@
-const MAP_SPRITE_NAME = "LevelMap";
-const MAP_SPRITE_SRC = "images/tiles.svg";
+const MAP_SPRITE_NAME = "Map";
+const MAP_SPRITE_SRC = "images/grass.svg";
 const LOCATIONS_SECTION_NAME = "locations";
+const IMAGE_SRC_PREFIX = "images/";
 
-const GROUNDS = {
-	SAND: {
-		INDEX: 0,
-		NAME: "Sand"
-	},
-	SNOW: {
-		INDEX: 1,
-		NAME: "Snow"
-	},
-	GRASS: {
-		INDEX: 2,
-		NAME: "Grass"
-	},
-	PLANET: {
-		INDEX: 3,
-		NAME: "Planet"
-	},
-	DIRT: {
-		INDEX: 4,
-		NAME: "Dirt"
-	},
-	STONE: {
-		INDEX: 5,
-		NAME: "Stone"
-	},
-}
-
-const TILES = {
-	0: {
-		NAME: "Tile",
-		X: 0
-	},
-	1: {
-		NAME: "Left tile",
-		X: 1
-	},
-	2: {
-		NAME: "Middle tile",
-		X: 2
-	},
-	3: {
-		NAME: "Right tile",
-		X: 3
-	},
-	4: {
-		NAME: "Center tile",
-		X: 4
-	},
-	5: {
-		NAME: "Left hill tile",
-		X: 5
-	},
-	6: {
-		NAME: "Right hill tile",
-		X: 6
-	},
-	7: {
-		NAME: "Half tile",
-		X: 7
-	},
-	8: {
-		NAME: "Left half tile",
-		X: 8
-	},
-	9: {
-		NAME: "Middle half tile",
-		X: 9
-	},
-	10: {
-		NAME: "Right half tile",
-		X: 10
-	},
-	11: {
-		NAME: "Left alt cliff tile",
-		X: 11
-	},
-	12: {
-		NAME: "Right alt cliff tile",
-		X: 12
-	},
-	13: {
-		NAME: "Left cliff tile",
-		X: 13
-	},
-	14: {
-		NAME: "Right cliff tile",
-		X: 14
-	},
-	15: {
-		NAME: "Rounded center tile",
-		X: 15
-	},
-	16: {
-		NAME: "Left corner tile",
-		X: 16
-	},
-	17: {
-		NAME: "Right corner tile",
-		X: 17
-	}
+const GROUNDS_NAMES = {
+	SAND: "sand",
+	SNOW: "snow",
+	GRASS: "grass",
+	PLANET: "planet",
+	// DIRT: "dirt",
+	// STONE: "stone",
 };
+
+const TILES = [
+	"tile",
+	"left",
+	"middle",
+	"right",
+	"center",
+	"left_hill",
+	"right_hill",
+	"half",
+	"left_half",
+	"middle_half",
+	"right_half",
+	"left_alt_cliff",
+	"right_alt_cliff",
+	"left_cliff",
+	"right_cliff",
+	"rounded_center",
+	"left_corner",
+	"right_corner",
+];
 
 const BOXES = {
 	
 };
 
-
-const TILE = {
-	WIDTH: 70,
-	HEIGHT: 70
-};
-
 class MapSprites {
-	constructor(spriter) {
-		this.spriter = spriter;
-		this.spriteName = MAP_SPRITE_NAME;
-		this.spriteSrc = MAP_SPRITE_SRC;
-		this.spriteSectionName = LOCATIONS_SECTION_NAME;
-	}
+	init(spriteManager) {
+		let sprite = spriteManager.addSprite(MAP_SPRITE_NAME, new StaticSprite(MAP_SPRITE_SRC));
 
-	init() {
-		let sprite = this.spriter.addSprite(this.spriteName, this.spriteSrc);
-		let locationsSection = sprite.createSection(this.spriteSectionName);
-
-		for (let ground in GROUNDS) {
-			let groundSection = locationsSection.createSection(GROUNDS[ground].NAME);
+		for (let name in GROUNDS_NAMES) {
+			let sprite_section = sprite.createSection(GROUNDS_NAMES[name], new ImagesBank());
 
 			for (let tile in TILES) {
-				groundSection.createObject(sprite.sprite, TILES[tile].NAME, 
-					TILES[tile].X * TILE.WIDTH, 
-					TILE.HEIGHT * GROUNDS[ground].INDEX,
-					TILE.WIDTH, TILE.HEIGHT);
+				let tileName = TILES[tile];
+				let imageSrc = IMAGE_SRC_PREFIX + GROUNDS_NAMES[name] + "/" + TILES[tile] + ".png";
+				sprite_section.createObject(tileName, imageSrc);
 			}
 		}
+
+
+
+		// let locationsSection = sprite.createSection(this.spriteSectionName);
+		//
+		// let groundSection = locationsSection.createSection("sand");
+		// let imageSrcMiddle = "sand" + "_";
+		//
+		// let image = new Image();
+		// image.src = IMAGE_SRC_PREFIX + imageSrcMiddle + "tile.png";
+		// groundSection.createObject(sprite.sprite, imageSrcMiddle + "tile", image, TILE.WIDTH, TILE.HEIGHT);
+
+		// for (let name of GROUNDS_NAMES) {
+		// 	let groundSection = locationsSection.createSection(name);
+		// 	let imageSrcMiddle = name + "_";
+		//
+		// 	for (let tile of TILES) {
+		// 		let image = new Image();
+		// 		image.src = IMAGE_SRC_PREFIX + imageSrcMiddle + tile;
+		// 		groundSection.createObject(imageSrcMiddle + tile, image, TILE.WIDTH, TILE.HEIGHT);
+		// 	}
+		// }
+
+		// for (let ground in GROUNDS) {
+		// 	let groundSection = locationsSection.createSection(GROUNDS[ground].NAME);
+		//
+		// 	for (let tile in TILES) {
+		// 		groundSection.createObject(sprite.sprite, TILES[tile].NAME,
+		// 			TILES[tile].X * TILE.WIDTH,
+		// 			TILE.HEIGHT * GROUNDS[ground].INDEX,
+		// 			TILE.WIDTH, TILE.HEIGHT);
+		// 	}
+		// }
 	}
 }

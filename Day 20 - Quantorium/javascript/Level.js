@@ -1,5 +1,5 @@
 class Level {
-	constructor(spriter, previewText, background, map,
+	constructor(previewText, background, map,
 		decoration, enemies, player) {
 		this.previewText = previewText;
 		this.background = background;
@@ -9,9 +9,9 @@ class Level {
 		this.player = player;
 	}
 
-	init() {
-		this.background.init();
-		this.map.init();
+	init(spriteManager) {
+		this.background.init(spriteManager);
+		this.map.init(spriteManager);
 		// this.decoration.init();
 	}
 
@@ -34,6 +34,10 @@ class Level {
 	}
 
 	draw(context) {
+		context.save();
+		context.translate(
+				clamp(-this.player.x + canvas.width / 2, -this.map.maxX + canvas.width, 0),
+				0);
 		this.background.draw(context);
 		this.map.draw(context);
 
@@ -43,11 +47,24 @@ class Level {
 			this.decoration[thing].draw(context);
 		}
 
+
 		this.player.draw(context);
+		context.restore();
 	}
 
 	move(keyboard) {
-		this.enemies.move(keyboard);
-		this.player.move(keyboard);
+		this.enemies.move(keyboard, this.map.tiles);
+		this.player.move(keyboard, this.map.tiles);
 	}
+}
+
+function clamp(value, min, max) {
+	// console.log(value);
+	if (value < min) {
+		return min;
+	} else if (value > max) {
+		return max;
+	}
+
+	return value;
 }
