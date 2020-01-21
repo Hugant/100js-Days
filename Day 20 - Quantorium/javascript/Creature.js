@@ -65,18 +65,18 @@ class Creature {
 			} 
 
 
-			// let topCollision = (dy + this.height > tile.y) &&
-			// 		(Math.abs(tile.y - (dy + this.height)) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
-			// let botCollision = (dy < tile.y + tile.height) &&
-			// 		(Math.abs((tile.y + tile.height) - dy) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
-			//
-			// let rightCollision = (dx + this.width > tile.x) &&
-			// 		(Math.abs(tile.x - (dx + this.width)) < DIMENSIONS.MAP_ELEMENT.WIDTH);
-			// let leftCollision = (dx < tile.x + tile.width) &&
-			// 		(Math.abs((tile.x + tile.width) - dx) < DIMENSIONS.MAP_ELEMENT.WIDTH);
+			let topCollision = (dy + this.height > tile.y) &&
+					(Math.abs(tile.y - (dy + this.height)) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
+			let botCollision = (dy < tile.y + tile.height) &&
+					(Math.abs((tile.y + tile.height) - dy) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
+
+			let rightCollision = (dx + this.width > tile.x) &&
+					(Math.abs(tile.x - (dx + this.width)) < DIMENSIONS.MAP_ELEMENT.WIDTH);
+			let leftCollision = (dx < tile.x + tile.width) &&
+					(Math.abs((tile.x + tile.width) - dx) < DIMENSIONS.MAP_ELEMENT.WIDTH);
 
 
-			// let collisionDiffs = {x: 0, y: 0};
+			let collisionDiffs = {x: 0, y: 0};
 
 			if (collisionX && collisionY) {
 				// console.log("-------------")
@@ -86,31 +86,31 @@ class Creature {
 				// console.log("botCollision: " + Math.abs((tile.y + tile.height) - dy));
 				// console.log("-------------")
 
-				if (min === 0 || min === 1) {
-					this.diffs.x = 0;
-				}
-
-				if (min === 2 || min === 3) {
-					this.diffs.y = 0;
-				}
-
-				// if (rightCollision || leftCollision) {
+				// if (min === 0 || min === 1) {
 				// 	this.diffs.x = 0;
-				// 	// break;
-				// } else if (topCollision || botCollision) {
+				// }
+				//
+				// if (min === 2 || min === 3) {
 				// 	this.diffs.y = 0;
 				// }
+
+				if (rightCollision || leftCollision) {
+					this.diffs.y = 0;
+					// break;
+				} else if (topCollision || botCollision) {
+					this.diffs.x = 0;
+				}
 			}
 
 			// dx = this.x + this.diffs.x;
 			//
 			// collisionX = (dx < tile.x + tile.width) && (dx + this.width > tile.x);
-			//
+
 			// topCollision = (dy + this.height > tile.y) &&
 			// 		(Math.abs(tile.y - (dy + this.height)) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
 			// botCollision = (dy < tile.y + tile.height) &&
 			// 		(Math.abs((tile.y + tile.height) - dy) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
-			//
+
 			// if (collisionX && collisionY) {
 			// 	if (topCollision || botCollision) {
 			// 		this.diffs.y = 0;
@@ -120,7 +120,7 @@ class Creature {
 
 			// return collisionDiffs;
 
-			// dy = this.y + this.diffs.y;
+			dy = this.y + this.diffs.y;
 			//
 			//
 			//
@@ -135,6 +135,8 @@ class Creature {
 			// 		// this.x = tile.x + tile.width - 1;
 			// 	}
 			// }
+
+			dx = this.x + this.diffs.x;
 		}
 	}
 

@@ -36,8 +36,7 @@ class Level {
 	draw(context) {
 		context.save();
 		context.translate(
-				clamp(-this.player.x + canvas.width / 2, -this.map.maxX + canvas.width, 0),
-				0);
+				clamp(-this.player.x + canvas.width / 2, -this.map.maxX + canvas.width, 0), 0);
 		this.background.draw(context);
 		this.map.draw(context);
 
