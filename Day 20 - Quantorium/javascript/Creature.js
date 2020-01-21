@@ -94,29 +94,31 @@ class Creature {
 				// 	this.diffs.y = 0;
 				// }
 
-				if (rightCollision || leftCollision) {
-					this.diffs.y = 0;
-					// break;
-				} else if (topCollision || botCollision) {
-					this.diffs.x = 0;
-				}
+				// if (rightCollision || leftCollision) {
+				// 	this.diffs.y = 0;
+				// 	// break;
+				// } else if (topCollision || botCollision) {
+				// 	this.diffs.x = 0;
+				// }
 			}
 
 			// dx = this.x + this.diffs.x;
 			//
-			// collisionX = (dx < tile.x + tile.width) && (dx + this.width > tile.x);
+			collisionX = (dx < tile.x + tile.width) && (dx + this.width > tile.x);
 
-			// topCollision = (dy + this.height > tile.y) &&
-			// 		(Math.abs(tile.y - (dy + this.height)) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
-			// botCollision = (dy < tile.y + tile.height) &&
-			// 		(Math.abs((tile.y + tile.height) - dy) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
+			topCollision = (dy + this.height > tile.y) &&
+					(Math.abs(tile.y - (dy + this.height)) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
+			botCollision = (dy < tile.y + tile.height) &&
+					(Math.abs((tile.y + tile.height) - dy) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
 
-			// if (collisionX && collisionY) {
-			// 	if (topCollision || botCollision) {
-			// 		this.diffs.y = 0;
-			// 		// break;
-			// 	}
-			// }
+			if (collisionX && collisionY) {
+				if (topCollision || botCollision) {
+					this.diffs.y = 0;
+					// break;
+				} else if (leftCollision || rightCollision) {
+					this.diffs.x = 0;
+				}
+			}
 
 			// return collisionDiffs;
 
