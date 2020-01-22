@@ -125,8 +125,8 @@ class Game {
 
 	engine() {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		this.level.move(this.keyboard);
 		this.level.draw(this.context);
+		this.level.move(this.keyboard, this.context);
 
 		if (this.level.passed()) {
 			this.nextLevel();

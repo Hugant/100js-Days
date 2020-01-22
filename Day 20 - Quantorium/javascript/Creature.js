@@ -34,111 +34,48 @@ class Creature {
 		throw "Method 'move' has't been initialized.";
 	}
 
-	mapCollision(tiles) {
-		let dx = this.x + this.diffs.x;
-		let dy = this.y + this.diffs.y;
-
+	mapCollision(tiles, context) {
 		for (let tile of tiles) {
-			let collisionX = (dx < tile.x + tile.width) && (dx + this.width > tile.x);
-			let collisionY = (dy < tile.y + tile.height) && (dy + this.height > tile.y);
-
-			let creatureCenterX = this.x + this.width / 2;
-			let creatureCenterY = this.y + this.height / 2;
-
+			let x = this.x + this.diffs.x;
+			let heroCenterX = x + this.width / 2;
 			let tileCenterX = tile.x + tile.width / 2;
+			let left = Math.max(x, tile.x);
+			let right = Math.min(x + this.width, tile.x + tile.width);
+
+			let y = this.y + this.diffs.y;
+			let heroCenterY = y + this.height / 2;
 			let tileCenterY = tile.y + tile.height / 2;
+			let top = Math.max(y, tile.y);
+			let bottom = Math.min(y + this.height, tile.y + tile.height);
 
-			// if
-
-			let mas = [
-				Math.abs(tile.y - (dy + this.height)),
-				Math.abs((tile.y + tile.height) - dy),
-				Math.abs(tile.x - (dx + this.width)),
-				Math.abs((tile.x + tile.width) - dx)
-			];
-
-			let min = 0;
-			for (let i = 1; i < mas.length; i++) {
-				if (mas[i] < mas[min]) {
-					min = i;
-				}
-			} 
-
-
-			let topCollision = (dy + this.height > tile.y) &&
-					(Math.abs(tile.y - (dy + this.height)) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
-			let botCollision = (dy < tile.y + tile.height) &&
-					(Math.abs((tile.y + tile.height) - dy) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
-
-			let rightCollision = (dx + this.width > tile.x) &&
-					(Math.abs(tile.x - (dx + this.width)) < DIMENSIONS.MAP_ELEMENT.WIDTH);
-			let leftCollision = (dx < tile.x + tile.width) &&
-					(Math.abs((tile.x + tile.width) - dx) < DIMENSIONS.MAP_ELEMENT.WIDTH);
-
-
-			let collisionDiffs = {x: 0, y: 0};
-
-			if (collisionX && collisionY) {
-				// console.log("-------------")
-				// console.log("topCollision: " + Math.abs(tile.y - (dy + this.height)));
-				// console.log("leftCollision: " + Math.abs(dx - (tile.x + tile.width)));
-				// console.log("rightCollision: " + Math.abs(tile.x - (dx + this.width)));
-				// console.log("botCollision: " + Math.abs((tile.y + tile.height) - dy));
-				// console.log("-------------")
-
-				// if (min === 0 || min === 1) {
-				// 	this.diffs.x = 0;
-				// }
-				//
-				// if (min === 2 || min === 3) {
-				// 	this.diffs.y = 0;
-				// }
-
-				// if (rightCollision || leftCollision) {
-				// 	this.diffs.y = 0;
-				// 	// break;
-				// } else if (topCollision || botCollision) {
-				// 	this.diffs.x = 0;
-				// }
-			}
-
-			// dx = this.x + this.diffs.x;
-			//
-			collisionX = (dx < tile.x + tile.width) && (dx + this.width > tile.x);
-
-			topCollision = (dy + this.height > tile.y) &&
-					(Math.abs(tile.y - (dy + this.height)) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
-			botCollision = (dy < tile.y + tile.height) &&
-					(Math.abs((tile.y + tile.height) - dy) < DIMENSIONS.MAP_ELEMENT.HEIGHT);
-
-			if (collisionX && collisionY) {
-				if (topCollision || botCollision) {
-					this.diffs.y = 0;
-					// break;
-				} else if (leftCollision || rightCollision) {
-					this.diffs.x = 0;
+			let width = right - left;
+			let height = bottom - top;
+			if (width > 0 && height > 0) {
+				if (width > height) {
+					if (heroCenterY < tileCenterY) {
+						this.diffs.y -= height;
+					} else {
+						this.diffs.y += height;
+					}
+				} else if (width < height) {
+					if (heroCenterX > tileCenterX) {
+						this.diffs.x += width;
+					} else {
+						this.diffs.x -= width;
+					}
+				} else {
+					if (heroCenterY < tileCenterY) {
+						this.diffs.y -= height / 2
+					} else {
+						this.diffs.y += height / 2;
+					}
+					if (heroCenterX > tileCenterX) {
+						this.diffs.x += width / 2;
+					} else {
+						this.diffs.x -= width / 2;
+					}
 				}
 			}
-
-			// return collisionDiffs;
-
-			dy = this.y + this.diffs.y;
-			//
-			//
-			//
-			//
-			//
-			// if (collisionY) {
-			// 	if (rightCollision) {
-			// 		this.diffs.x = 0;
-			// 		// this.x = tile.x - this.width + 1;
-			// 	} else if (leftCollision) {
-			// 		this.diffs.x = 0;
-			// 		// this.x = tile.x + tile.width - 1;
-			// 	}
-			// }
-
-			dx = this.x + this.diffs.x;
 		}
 	}
 
@@ -165,7 +102,7 @@ class Player extends Creature {
 		// TODO: Declare function
 	}
 
-	move(keyboard, tiles) {
+	move(keyboard, tiles, context) {
 		let motion;
 
 		this.diffs.x = 0;
@@ -201,8 +138,7 @@ class Player extends Creature {
 
 		this.diffs.y += this.gravity;
 
-		let collisionDiffs = this.mapCollision(tiles);
-		// console.log(collisionDiffs);
+		this.mapCollision(tiles, context);
 		this.x += this.diffs.x ;
 		this.y += this.diffs.y ;
 
@@ -227,7 +163,7 @@ class Enemy extends Creature {
 		this.gravity = 3;
 	}
 
-	move(keyboard, tiles) {
+	move(keyboard, tiles, context) {
 
 		// this.diffs.x = 0;
 
@@ -248,7 +184,7 @@ class Enemy extends Creature {
 		this.diffs.x = this.direction * Math.abs(this.diffs.x);
 		this.diffs.y = this.gravity;
 
-		this.mapCollision(tiles);
+		this.mapCollision(tiles, context);
 
 		this.x += this.diffs.x;
 		this.y += this.diffs.y;

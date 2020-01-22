@@ -51,9 +51,9 @@ class Level {
 		context.restore();
 	}
 
-	move(keyboard) {
-		this.enemies.move(keyboard, this.map.tiles);
-		this.player.move(keyboard, this.map.tiles);
+	move(keyboard, context) {
+		this.enemies.move(keyboard, this.map.tiles, context);
+		this.player.move(keyboard, this.map.tiles, context);
 	}
 }
 
