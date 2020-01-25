@@ -16,8 +16,8 @@ class Background {
 	}
 
 	draw(context) {
-		for (let background in this.backgrounds) {
-			this.backgrounds[background].draw(context);
+		for (let background of this.backgrounds) {
+			background.draw(context);
 		}
 	}
 }

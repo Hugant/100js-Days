@@ -1,3 +1,5 @@
+
+
 const DIRECTIONS = {
 	RIGHT: 1,
 	LEFT: -1
@@ -20,6 +22,10 @@ class Creature {
 		};
 		this.direction = DIRECTIONS.RIGHT;
 		this.animationObject = animationObject;
+
+		let figure = new Rect(new Point(this.x, this.y, this.width, this.height));
+		let figure1 = new Circle(new Point(this.x, this.y, 10));
+		figure.collision(figure1);
 	}
 
 	draw(context) {
@@ -79,8 +85,10 @@ class Creature {
 		}
 	}
 
-	collision() {
-		throw "Method 'collision' has't been initialized.";
+	collision(creature) {
+		this.hitbox.collision(creature.hitbox);
+
+		// throw "Method 'collision' has't been initialized.";
 	}
 }
 
