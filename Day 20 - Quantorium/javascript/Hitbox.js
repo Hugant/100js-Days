@@ -4,7 +4,11 @@ class Hitbox {
 	}
 
 	addFigure(figure) {
-		this.figures.push(figure);
+		if (figure instanceof Figure) {
+			this.figures.push(figure);
+		} else {
+			throw 'You trying add not figure in Hitbox';
+		}
 	}
 
 	collision(hitbox) {

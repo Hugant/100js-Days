@@ -119,7 +119,7 @@ class SpriteCharacter {
 		} else {
 			this.motions[name] = new Motion(spriteObjectsArr, stepTransition);
 			++this.length;
-			if (this.length == 1) {
+			if (this.length === 1) {
 				this.currentMotion = this.motions[name];
 			}
 		}

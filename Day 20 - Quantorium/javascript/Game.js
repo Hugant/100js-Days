@@ -9,7 +9,7 @@ class Game {
 		this.levels = null;
 
 		this.mainEngine = function() {
-			console.log("Main engine has't been initialized.");
+			console.log("Main engine hasn't been initialized.");
 		};
 
 		this.enemies = [];

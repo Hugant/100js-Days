@@ -37,7 +37,7 @@ class Creature {
 	}
 
 	move() {
-		throw "Method 'move' has't been initialized.";
+		throw "Method 'move' hasn't been initialized.";
 	}
 
 	mapCollision(tiles, context) {
