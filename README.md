@@ -13,7 +13,7 @@ It is sad that there is little opportunity to write code for the soul.
 
 
 # List of days
-[Day 1 - Random background color](http://sabaka.net)
+[Day 1 - Random background color](https://github.com/Hugant/100js-Days/tree/master#day-1---random-background-color)
 
 
 
